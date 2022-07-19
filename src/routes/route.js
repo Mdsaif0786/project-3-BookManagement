@@ -4,13 +4,13 @@ const userController = require("../controllers/userController")
 const bookController = require("../controllers/bookController")
 const reviewController  = require("../controllers/reviewController")
 const middleware = require("../middleware/auth.js")
-
+const aws = require("../controllers/awsController")
 //User Apis
 router.post("/register",userController.createUser)
 router.post("/login",userController.loginUser)
 
 //Books Apis
-router.post("/books",middleware.authentication,middleware.authorisation, bookController.createBook)
+router.post("/books",middleware.authentication,middleware.authorisation,aws.aws1, bookController.createBook)
 router.get("/books",middleware.authentication,bookController.getBooks)
 router.get("/books/:bookId",middleware.authentication,middleware.authorisationbyBId,bookController.getBookById)
 router.put("/books/:bookId",middleware.authentication,middleware.authorisationbyBId,bookController.updateBook)
